@@ -3,9 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./assets/css/styles.css" />
     <title>Todo List</title>
 </head>
 <body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">MI TODO LIST</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="fx-row fx-space-between fx-items-center">
+
+            <h1>Lista de Tareas</h1>
+      
+        </div>
+
+        <br>
+        
+        <form id="filter-form" class="filter-section">
+            <input type="text" id="id-filter" placeholder="ID de la Tarea" class="filter-field"/>
+            <button type="submit" id="apply-filters" class="btn-submit">Buscar ID de Tarea</button>
+            <button type="reset" id="reset-filters" class="btn">Restaurar Lista</button>
+            <button type="submit" id="process-task" class="btn-action">Agregar Tarea</button>
+        </form>
+
+        <br>
+
+        <div class="table-container">
+
+            <table id="data-table">
+              <thead>
+                <tr>
+                  <th>Titulo</th>
+                  <th>Descripcion</th>
+                  <th>Estatus</th>
+                  <th>Fecha de Vencimiento</th>
+                  <th>Prioridad</th>
+                  <th>Etiqueta</th>
+                  <th>Editar</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody id="data-table-body">
+                <!-- LLENAR CON API -->
+              </tbody>
+            </table>
+      
+        </div>
+
+        <div id="message" class="message">
+            <p>No se ha realizado una consulta de ventas.</p>
+        </div>
+
+        <div id="modal-background" class="modal-background">
+        </div>
+
+        <div id="modal" class="modal">
+
+            <h2 id="modal-title">Nueva Tarea</h2>
+      
+            <form id="sale-form" class="form-section">
+
+              <h4 id="id-field"></h4>
+      
+              <label for="title-field">Titulo</label>
+              <input type="text" id="title-field" class="form-field" required/>
+      
+              <label for="description-field">Descripcion</label>
+              <input type="text" id="description-field" class="form-field" required/>
+
+              <label id="status-field-label" for="status-field" style="display: none;">Estatus</label>
+              <input type="checkbox" id="status-field" style="display: none;" class="form-field"/>
+      
+              <label for="date-field">Fecha de Vencimiento</label>
+              <input type="date" id="date-field" class="form-field" required>
+      
+              <label for="priority-field">Prioridad</label>
+              <select id="priority-field" class="form-field" required>
+                <option value="" selected disabled hidden>Selecciona un Tag</option>
+                <option value="Alta">Alta</option>
+                <option value="Media">Media</option>
+                <option value="Baja">Baja</option>
+              </select>
+
+              <label for="tag-field">Etiqueta</label>
+              <select id="tag-field" class="form-field" required>
+                <option value="" selected disabled hidden>Selecciona un Tag</option>
+                <option value="Personal">#Personal</option>
+                <option value="Laboral">#Laboral</option>
+                <option value="Escolar">#Escolar</option>
+              </select>
+      
+              <button id="botonModal" type="submit" class="btn-submit">Guardar Tarea</button>
+      
+            </form>
+      
+        </div>
+
+    </main>
+
+
+    <script src="./shared/fetch-api.js"></script>
+    <script src="./shared/utils.js"></script>
+    <script src="script.js"></script>
     
 </body>
 </html>

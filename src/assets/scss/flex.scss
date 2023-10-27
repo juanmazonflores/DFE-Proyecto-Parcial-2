@@ -1,0 +1,39 @@
+/*FLEX*/
+.fx-row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .fx-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .fx-align-items-center {
+    align-items: center;
+  }
+  
+  .fx-content-space-between {
+    justify-content: space-between;
+  }
+  
+  .fx-space-between {
+    justify-content: space-between;
+  }
+  
+  .fx-content-center {
+    justify-content: center;
+  }
+    @media screen and (max-width: 768px) {
+    
+      .fx-hide-xs {
+        display: none;
+      }
+    
+      .fx-column-xs {
+        display: flex;
+        flex-direction: column;
+      }
+    
+    }
+    
