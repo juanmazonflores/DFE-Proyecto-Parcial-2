@@ -70,7 +70,6 @@ function displayTasksTable(tasks) {
     tasks.forEach(task => {
   
       const row = document.createElement('tr');
-      console.log(task.completed);
       
       if (task.completed) {
         row.style.textDecoration='line-through';
@@ -169,7 +168,6 @@ function openCloseFilters(){
 }
 
 function showHide(show){
-  console.log(show)
   
   if (show=='none' || show=='') {
     return 'initial';
@@ -194,7 +192,7 @@ function searchTasks() {
     
     const tag = document.getElementById('tag-filter').value;
     const completed = document.getElementById('status-filter').checked;
-    console.log(completed);
+
     getTasksData(tag,completed);
 }
   
@@ -208,8 +206,6 @@ function validarCampos() {
   const priority = document.getElementById('priority-field');
   const tag = document.getElementById('tag-field');
   const dueDate = document.getElementById('date-field');
-  console.log(dueDate);
-
   
 
   if (title.value=='' ) {
@@ -412,7 +408,6 @@ function getTaskCheckbox(id,checked) {
     .then(data => {
       const task=APIToTask(data)
       task.completed=checked;
-      console.log(task.completed)
       updateTask(task);
     });
   
