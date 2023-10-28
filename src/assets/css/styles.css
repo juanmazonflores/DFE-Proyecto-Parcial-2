@@ -278,7 +278,13 @@ table tbody tr input[type=checkbox] {
 .form-section input::placeholder {
   font-weight: lighter;
 }
+.form-section textarea::placeholder {
+  font-weight: lighter;
+}
 .form-section select:invalid {
+  font-weight: lighter;
+}
+.form-section input[type=date]:invalid::-webkit-datetime-edit {
   font-weight: lighter;
 }
 .form-section .filter-field:invalid {
@@ -330,14 +336,15 @@ table tbody tr input[type=checkbox] {
   width: 25%;
 }
 .form-section input[type=text],
-.form-section input[type=number], .form-section select {
+.form-section input[type=number], .form-section select, .form-section textarea {
   flex-grow: 1;
-  min-width: 200px;
+  min-width: 300px;
 }
 .form-section input[type=date] {
   display: flex;
   flex-direction: row;
-  min-width: 200px;
+  min-width: 300px;
+  align-items: left;
 }
 .form-section input[type=checkbox] {
   font: inherit;
@@ -349,7 +356,6 @@ table tbody tr input[type=checkbox] {
 }
 .form-section button {
   border: none;
-  border-radius: 3px;
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: background-color 0.3s;

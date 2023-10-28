@@ -15,6 +15,7 @@ function formatDate(date) {
   }
   
 function checked2(status) {
+  console.log('entre2');
   if (status==true) {
     return 'Completa';
   }else{

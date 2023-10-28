@@ -18,8 +18,16 @@
         font-weight: lighter;
     }
 
+    textarea::placeholder{
+        font-weight: lighter;
+    }
+
     select:invalid {
 
+        font-weight: lighter;
+    }
+
+    input[type=date]:invalid::-webkit-datetime-edit {
         font-weight: lighter;
     }
 
@@ -65,15 +73,16 @@
     }
 
     input[type="text"],
-    input[type="number"],select {
+    input[type="number"],select,textarea {
         flex-grow: 1;
-        min-width: 200px;
+        min-width: 300px;
     }
 
     input[type="date"] {
         display: flex;
         flex-direction: row;
-        min-width: 200px;
+        min-width: 300px;
+        align-items: left;
     }
 
     input[type=checkbox]{
@@ -88,7 +97,6 @@
 
     button {
         border: none;
-        border-radius: 3px;
         padding: 0.5rem 1rem;
         cursor: pointer;
         transition: background-color 0.3s;

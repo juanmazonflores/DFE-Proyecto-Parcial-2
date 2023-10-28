@@ -256,6 +256,12 @@ function initTaskButtonsHandler() {
     document.getElementById('modal-background').addEventListener('click', () => {
       closeTaskModal();
     });
+
+    document.getElementById('status-field').addEventListener('change', () => {
+      const checkbox=document.getElementById('status-field');
+      const p=document.getElementById('status-p-field');
+      p.textContent=checked2(checkbox.checked);
+    });
   
     document.getElementById('sale-form').addEventListener('submit', event => {
  
@@ -279,6 +285,8 @@ function openTaskModal(data) {
     document.getElementById('status-field-label').style.display='initial';
     document.getElementById('status-field').style.display='initial';
     document.getElementById('status-field').checked=data.completed;
+    document.getElementById('status-p-field').style.display='initial';
+    document.getElementById('status-p-field').textContent=checked2(data.completed);
     document.getElementById('priority-field').value=data.priority;
     document.getElementById('tag-field').value=data.tag;
     const dueDate2 = new Date(data.dueDate);
@@ -292,6 +300,7 @@ function closeTaskModal() {
     document.getElementById('modal-title').textContent='Nueva Tarea';
     document.getElementById('status-field-label').style.display='none';
     document.getElementById('status-field').style.display='none';
+    document.getElementById('status-p-field').style.display='none';
     document.getElementById('sale-form').reset();
     document.getElementById('modal-background').style.display = 'none';
     document.getElementById('modal').style.display = 'none';
@@ -330,6 +339,8 @@ function processTask() {
       tag, 
       dueDate
     );
+
+    
 
     // Enviamos los datos 
     if (bandera=='Guardar Cambios') {
@@ -420,6 +431,7 @@ function createTask(task) {
     .then(task => {
       closeTaskModal();
       resetTasks();
+      console.log(task.id);
       window.alert(`Tarea ${task.id} creada correctamente.`);
     });
 
