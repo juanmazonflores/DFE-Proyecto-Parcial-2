@@ -1,0 +1,104 @@
+@import 'variables';
+
+
+
+.sidebar{
+  position: fixed;
+  box-sizing: border-box;
+  width: max(10%, 200px);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  display: inline-block;
+  z-index: 1;
+  padding-top: 50px;
+  background-color: $color-container;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.10);
+  
+  header{
+
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+
+  }
+
+  li {
+    padding-top: 2rem;
+  
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }  
+  button{
+    background-color: transparent;
+    font-family: $font-family;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color:$color-font;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    &:hover {
+      background-color: darken($color-highlight, 10%);
+      color: $color-font-highlight;
+    }
+  }
+  label{
+    font-size: 1.2rem;
+    padding: 1rem;
+    border: transparent;
+    border-radius: 3px;
+    width: 100%;
+    height: 50px;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  input[type="checkbox"]{
+    cursor: pointer;
+    font-size: 0.5rem;
+    padding: 1rem;
+    margin-right: 15px;
+    width: 1.5rem;
+    height: 50px;
+    background-color: $color-container;
+   
+  }
+
+.filter-field{
+  display: none;
+}
+
+#tag-filter{
+  display: none;
+}
+
+
+  select {
+    text-align: left;
+    background-color: transparent;
+    font-family: $font-family;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border: transparent;
+    background-color: transparent;
+    border-radius: 3px;
+    width: 100%;
+    height: 50px;
+    color:$color-font;
+    font-weight: bold;
+    &:focus, &:hover, &:active {
+      border: transparent;
+      background-color: $color-container;
+    }
+  }
+
+}

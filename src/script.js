@@ -58,31 +58,36 @@ function displayTasksView(tasks) {
   
       hideMessage();
   
-      displaySalesTable(tasks);
+      displayTasksTable(tasks);
     }
   
 }
 
-function displaySalesTable(tasks) {
+function displayTasksTable(tasks) {
 
     const tablaBody = document.getElementById('data-table-body');
   
     tasks.forEach(task => {
   
       const row = document.createElement('tr');
-  
+      console.log(task.completed);
+      
+      if (task.completed) {
+        row.style.textDecoration='line-through';
+
+      }
       row.innerHTML = `
         <td>${task.title}</td>
         <td>${task.description}</td>
-        <input class="status-checkbox" type='checkbox' data-task-id="${task.id}" ${checked(task.completed)} >${checked2(task.completed)}</input>
+        <td><input class="status-checkbox" type='checkbox' data-task-id="${task.id}" ${checked(task.completed)} >${checked2(task.completed)}</input></td>
         <td>${formatDate(task.dueDate)}</td>
         <td>${task.priority}</td>
         <td>${task.tag}</td>
         <td>
-          <button class="btn-update" data-task-id="${task.id}">Editar</button>
+          <button class="btn-update fa-solid fa-pen" data-task-id="${task.id}"></button>
         </td>
         <td>
-          <button class="btn-delete" data-task-id="${task.id}">Eliminar</button>
+          <button class="btn-delete fa-solid fa-trash" data-task-id="${task.id}"></button>
         </td>
       `;
   
@@ -138,32 +143,108 @@ function hideMessage() {
 function initFilterButtonsHandler() {
 
     document.getElementById('filter-form').addEventListener('submit', event => {
+      console.log('entre');
       event.preventDefault();
       searchTasks();
     });
   
-    document.getElementById('reset-filters').addEventListener('click', () => clearTasks());
+    document.getElementById('open-filters').addEventListener('click', event => {
+      openCloseFilters();
+    });
+    
+    document.getElementById('reset-filters').addEventListener('click', () => resetTasks());
   
 }
 
-function clearTasks() {
-    document.querySelectorAll('input.filter-field').forEach(input => input.value = '');
-  
+function openCloseFilters(){
+  let show= document.getElementById('tag-filter').style.display;
+  show=showHide(show);
+  document.getElementById('tag-filter').style.display=show;
+  document.getElementById('status-filter').style.display=show;
+  document.getElementById('apply-filters').style.display=show;
+  document.getElementById('status-label-field').style.display=show;
+  if (show=='none') {
     resetTasks();
+  }
+}
+
+function showHide(show){
+  console.log(show)
+  
+  if (show=='none' || show=='') {
+    return 'initial';
+  }else{
+    return 'none';
+  }
 }
 
 function resetTasks() {
-  console.log("entre")
+  
     document.querySelectorAll('input.filter-field').forEach(input => input.value = '');
+    document.querySelectorAll('input.filter-field').forEach(input => input.checked = false);
+    document.querySelectorAll('select.filter-field').forEach(select => select.value = '');
+    document.getElementById('tag-filter').style.display='none';
+    document.getElementById('status-filter').style.display='none';
+    document.getElementById('apply-filters').style.display='none';
+    document.getElementById('status-label-field').style.display='none';
     searchTasks();
 }
 
 function searchTasks() {
     
-    const id = document.getElementById('id-filter').value;
-    getTasksData(id);
+    const tag = document.getElementById('tag-filter').value;
+    const completed = document.getElementById('status-filter').checked;
+    console.log(completed);
+    getTasksData(tag,completed);
 }
   
+//#endregion
+
+//#region 4. VALIDACION DE CAMPOS
+
+function validarCampos() {
+  const title = document.getElementById('title-field');
+  const description = document.getElementById('description-field');
+  const priority = document.getElementById('priority-field');
+  const tag = document.getElementById('tag-field');
+  const dueDate = document.getElementById('date-field');
+  console.log(dueDate);
+
+  
+
+  if (title.value=='' ) {
+    alert("Porfavor, llena todos los campos :) ")
+    title.focus();
+    return false;
+  } 
+
+  if (description.value=='' ) {
+    alert("Porfavor, llena todos los campos :) ")
+    description.focus();
+    return false;
+  } 
+
+  if (priority.value=='' ) {
+    alert("Porfavor, llena todos los campos :) ")
+    priority.focus();
+    return false;
+  }
+
+  if (tag.value=='' ) {
+    alert("Porfavor, llena todos los campos :) ")
+    tag.focus();
+    return false;
+  } 
+
+  if (dueDate.value=='' ) {
+    alert("Porfavor, llena todos los campos :) ")
+    dueDate.focus();
+    return false;
+  } 
+
+}
+
+
 //#endregion
 
 //#region 4. BOTONES PARA AGREGAR, ACTUALIZAR Y ELIMINAR TAREAS (VIEW)
@@ -183,6 +264,7 @@ function initTaskButtonsHandler() {
     document.getElementById('sale-form').addEventListener('submit', event => {
  
       event.preventDefault();
+      validarCampos();
       processTask();
     });
   
@@ -200,7 +282,7 @@ function openTaskModal(data) {
     document.getElementById('description-field').value=data.description;
     document.getElementById('status-field-label').style.display='initial';
     document.getElementById('status-field').style.display='initial';
-    document.getElementById('status-field').checked=data.status;
+    document.getElementById('status-field').checked=data.completed;
     document.getElementById('priority-field').value=data.priority;
     document.getElementById('tag-field').value=data.tag;
     const dueDate2 = new Date(data.dueDate);
@@ -300,13 +382,14 @@ function initUpdateTaskButtonHandler() {
 
 }
 
+
 //#endregion
 
 //#region 5. CONSUMO DE DATOS DESDE API
 
-function getTasksData(id) {
+function getTasksData(tag,completed) {
 
-  const url = buildGetTasksDataUrl(id);
+  const url = buildGetTasksDataUrl(tag,completed);
 
   fetchAPI(url, 'GET')
     .then(data => {
@@ -334,6 +417,8 @@ function getTaskCheckbox(id,checked) {
     });
   
 }
+
+
 function createTask(task) {
 
   fetchAPI(`${apiURL}/users/219230126/tasks`, 'POST', task)
@@ -356,7 +441,6 @@ function updateTask(task) {
 
 }
 
-
 function deleteTask(taskId) {
 
   const confirm = window.confirm(`¿Estás seguro de que deseas eliminar la tarea ${taskId}?`);
@@ -372,14 +456,21 @@ function deleteTask(taskId) {
   }
 }
 
-function buildGetTasksDataUrl(id) {
+function buildGetTasksDataUrl(tag,completed) {
+
   const url = new URL(`${apiURL}/users/219230126/tasks`);
-  if (id) {
-    url.searchParams.append('id', id);
+  if (tag) {
+    url.searchParams.append('tag', tag);
+  }
+
+  if (completed) {
+    url.searchParams.append('completed', completed);
   }
 
   return url;
 }
+
+
 
 //#endregion
 

@@ -1,0 +1,77 @@
+/*CATALOGO*/
+@import 'variables';
+
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+  thead tr {
+    background-color: $color-container-highlight;
+    color: $color-font;
+    text-align: center;
+    th {
+      border: none;
+      font-size: 1.2rem;
+      font-weight: bolder;
+      padding: 2rem 1.25rem;
+      white-space: nowrap;
+    }
+  }
+
+  tbody tr {
+    border-bottom: none;
+    
+
+    &:nth-of-type(even) {
+      background-color:  $color-container;
+    }
+
+    &:last-of-type {
+      border-bottom: 4px solid  $color-container-highlight;
+    }
+
+    td{
+      padding: 1rem 1.25rem;
+      border: none;
+      white-space: wrap;
+      text-align: center;
+    }
+    
+    input[type=checkbox]{
+        font: inherit;
+        accent-color:  $color-font;  
+        margin-right: 0.4rem;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 0px;
+
+    }
+
+  }
+
+}
+
+.fa-solid{
+    color: $color-font;
+    background-color: transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  
+.message {
+    display: none;
+    text-align: center;
+    font-size: 1rem;
+    padding: 2rem;
+  }
+  

@@ -9,9 +9,52 @@
   }
 
   body {
+    background: url("../img/fondo/fondo4.jpg") no-repeat center center fixed;;
+    background-size: cover;
     background-color: $color-background;
     font-family: $font-family;
     font-size: 20px;
     font-weight: 400;
     color: $color-font;
+
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  main{
+    position: fixed;
+    margin-left: max(10%, 225px);
+    box-shadow: rgba(255, 255, 255, 0.25) 0 0 100px 0;
+    padding: 1rem 2rem;
+    margin-top: 1.5rem; 
+    margin-right: 1.5rem;
+    width: 85%;
+    background-color: $color-container;
+  }
+
+  /*
+  main {
+    background-color: $workarea-background-color;
+    box-shadow: rgba(255, 255, 255, 0.25) 0 0 100px 0;
+    
+    border-radius: 8px;
+    padding: 1rem 2rem;
+   
+  }
+  */
+  
+h1 {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
