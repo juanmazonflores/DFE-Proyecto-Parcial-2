@@ -77,9 +77,9 @@ function displayTasksTable(tasks) {
 
       }
       row.innerHTML = `
+        <td><input class="status-checkbox" type='checkbox' data-task-id="${task.id}" ${checked(task.completed)} >${checked2(task.completed)}</input></td>
         <td>${task.title}</td>
         <td>${task.description}</td>
-        <td><input class="status-checkbox" type='checkbox' data-task-id="${task.id}" ${checked(task.completed)} >${checked2(task.completed)}</input></td>
         <td>${formatDate(task.dueDate)}</td>
         <td>${task.priority}</td>
         <td>${task.tag}</td>
